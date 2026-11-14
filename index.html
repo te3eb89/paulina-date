@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +11,24 @@
 body{
     font-family: Arial, sans-serif;
     background:#ffe6ef;
-    text-align:center;
     margin:0;
     padding:20px;
+    text-align:center;
     overflow-x:hidden;
 }
 
 .container{
-    max-width:700px;
+    max-width:800px;
     margin:auto;
     padding-top:30px;
 }
 
+.hidden{
+    display:none;
+}
+
 img{
-    width:300px;
+    width:320px;
     max-width:90%;
     border-radius:20px;
     box-shadow:0 5px 20px rgba(0,0,0,.2);
@@ -37,38 +41,38 @@ button{
     cursor:pointer;
     font-size:20px;
     margin:10px;
-    transition:all .3s ease;
+    transition:all .3s;
 }
 
-.continueBtn,
-.yesBtn{
+button:hover{
+    transform:scale(1.03);
+}
+
+.primary{
     background:#ff4d8a;
     color:white;
 }
 
 .noBtn{
-    background:#777;
+    background:#666;
     color:white;
     position:absolute;
 }
 
-.hidden{
-    display:none;
-}
-
-#message{
-    min-height:50px;
-    font-size:20px;
-    color:#d63384;
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 4px 20px rgba(0,0,0,.1);
     margin-top:20px;
-    font-weight:bold;
 }
 
 .progress{
-    width:80%;
+    width:90%;
+    max-width:600px;
     height:30px;
     background:#ddd;
-    margin:20px auto;
+    margin:auto;
     border-radius:20px;
     overflow:hidden;
 }
@@ -77,19 +81,53 @@ button{
     width:0%;
     height:100%;
     background:#ff4d8a;
-    transition:.2s;
+}
+
+#message{
+    min-height:50px;
+    font-size:20px;
+    color:#d63384;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+table{
+    margin:auto;
+    width:100%;
+    max-width:500px;
+    border-collapse:collapse;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
 }
 
 .full-screen-yes{
-    width:80vw;
+    width:85vw;
     height:40vh;
-    font-size:40px;
+    font-size:38px;
 }
 
 input[type=date]{
     padding:15px;
     font-size:20px;
-    margin-top:20px;
+}
+
+.cert{
+    border:6px solid #333;
+    border-radius:20px;
+    padding:25px;
+    background:white;
+}
+
+.fade{
+    animation:fadeIn .7s;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
 </style>
@@ -98,7 +136,7 @@ input[type=date]{
 
 <!-- PAGE 1 -->
 
-<div id="page1" class="container">
+<div id="page1" class="container fade">
 
 <img src="monkey.jpeg">
 
@@ -106,35 +144,98 @@ input[type=date]{
 
 <h2>I have a quick question.</h2>
 
-<button class="continueBtn" onclick="startResearch()">
-Continue →
+<p>
+This process has been approved by the International Monkey Research Institute.
+</p>
+
+<button class="primary" onclick="showTerms()">
+Begin Investigation →
 </button>
 
 </div>
 
 <!-- PAGE 2 -->
 
-<div id="page2" class="container hidden">
+<div id="page2" class="container hidden fade">
 
-<h2>
-After approximately 7 seconds of careful analysis...
-</h2>
+<h1>Terms & Conditions</h1>
 
-<div class="progress">
-<div class="bar" id="bar"></div>
+<div class="card" style="text-align:left;">
+
+<p>
+By proceeding, you acknowledge:
+</p>
+
+<ul>
+<li>The monkey knows best.</li>
+<li>This study has not been peer reviewed.</li>
+<li>No buttons may experience technical difficulties.</li>
+<li>Scientific accuracy is estimated at approximately 4%.</li>
+<li>Side effects may include dinner, drinks and good conversation.</li>
+<li>You agree not to blame the monkey for any positive outcomes.</li>
+</ul>
+
 </div>
 
-<h3 id="progressText">
-Calculating compatibility...
-</h3>
+<button class="primary" onclick="startResearch()">
+I Have Definitely Read All Of That
+</button>
 
 </div>
 
 <!-- PAGE 3 -->
 
-<div id="page3" class="container hidden">
+<div id="page3" class="container hidden fade">
 
-<h1>The results are in.</h1>
+<h1>
+After approximately 7 seconds of careful analysis...
+</h1>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<h3 id="loadingText">
+Calculating compatibility...
+</h3>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div id="page4" class="container hidden fade">
+
+<h1>FINAL REPORT</h1>
+
+<div class="card">
+
+<table>
+<tr><td>Humor</td><td>93%</td></tr>
+<tr><td>Compatibility</td><td>99%</td></tr>
+<tr><td>Likelihood of Enjoying A Date</td><td>100%</td></tr>
+<tr><td>Trustworthiness of Monkey</td><td>1000%</td></tr>
+</table>
+
+</div>
+
+<br>
+
+<h2>
+Final Recommendation:
+Proceed To Date
+</h2>
+
+<button class="primary" onclick="showQuestion()">
+View Results
+</button>
+
+</div>
+
+<!-- PAGE 5 -->
+
+<div id="page5" class="container hidden fade">
+
+<h1>The Results Are In.</h1>
 
 <h3>
 Peer reviewed by one monkey and absolutely nobody else.
@@ -142,15 +243,19 @@ Peer reviewed by one monkey and absolutely nobody else.
 
 <h2>
 Will you go on a date with me?
-<br><br>
-You have 10 attempts to say no.
-<br>
-(I am never calling it a "BFF" or a "hangout". Sue me.)
 </h2>
+
+<p>
+You have 10 attempts to say no.
+</p>
+
+<p>
+(I am never calling it a BFF, a hangout, or a friendly outing. Sue me.)
+</p>
 
 <div id="message"></div>
 
-<button id="yesBtn" class="yesBtn">
+<button id="yesBtn" class="primary">
 ✅ YES ✅
 </button>
 
@@ -160,41 +265,99 @@ You have 10 attempts to say no.
 
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 6 -->
 
-<div id="page4" class="container hidden">
+<div id="page6" class="container hidden fade">
 
-<h1>Excellent choice.</h1>
+<h1>MONKEY COURT</h1>
+
+<div class="card">
+
+<h2>Your appeal has been reviewed.</h2>
+
+<p>Escalating request...</p>
+<p>Forwarding to monkey court...</p>
+<p>Reviewing evidence...</p>
+<p>Consulting experts...</p>
+<p>Monkey court has reached a decision.</p>
+
+<h1>
+APPEAL DENIED
+</h1>
+
+</div>
+
+<button class="primary" onclick="showCalendar()">
+Accept Scientific Recommendation ✅
+</button>
+
+</div>
+
+<!-- PAGE 7 -->
+
+<div id="page7" class="container hidden fade">
+
+<h1>Excellent.</h1>
 
 <h2>Please select a date.</h2>
 
-<p>The scientific process is almost complete.</p>
+<p>
+The scientific process is almost complete.
+</p>
 
 <input type="date" id="datePicker" min="">
 
 <br><br>
 
-<button onclick="confirmDate()">
-Confirm
+<button class="primary" onclick="confirmDate()">
+Confirm Date
 </button>
 
 </div>
 
-<!-- PAGE 5 -->
+<!-- PAGE 8 -->
 
-<div id="page5" class="container hidden">
+<div id="page8" class="container hidden fade">
 
-<h1>Perfect.</h1>
+<div class="cert">
 
-<h2 id="finalDate"></h2>
+<h1>
+CERTIFICATE OF GOOD DECISION MAKING
+</h1>
+
+<p>
+This certifies that:
+</p>
+
+<h2>
+PAULINA
+</h2>
+
+<p>
+has voluntarily selected:
+</p>
+
+<h2 id="selectedDate"></h2>
+
+<p>
+for one (1) date with Amine.
+</p>
+
+<br>
 
 <h3>
-The monkey approves 🐒
+🐒 MONKEY COUNCIL
 </h3>
 
-<h3>
+<p>
+Officially Certified
+</p>
+
+<p>
 (For legal reasons, this is not actually binding.)
-</h3>
+</p>
+
+</div>
 
 </div>
 
@@ -202,52 +365,84 @@ The monkey approves 🐒
 
 const funnyMessages = [
 "Nice try cutiepie 😏",
-"Let's not do anything rash. Relaaaaax.",
+"Let's not do anything rash.",
 "Error 404: NO button not found.",
-"The monkey is very disappointed, Miss Paulina.",
+"The monkey is disappointed.",
 "Come on, really?",
 "That seems statistically unlikely.",
 "My monkey lawyer advised against that choice.",
-"Impressive commitment. We could have picked a date already.",
-"At this point we should probably just go on the date. Just give up!!",
+"Impressive commitment.",
+"We could have picked a date already.",
 "Okay, now I'm rooting for you to catch this button."
 ];
 
 let attempts = 0;
 
+function hideAll(){
+for(const page of document.querySelectorAll(".container")){
+page.classList.add("hidden");
+}
+}
+
+function showTerms(){
+hideAll();
+document.getElementById("page2").classList.remove("hidden");
+}
+
 function startResearch(){
 
-document.getElementById("page1").classList.add("hidden");
-document.getElementById("page2").classList.remove("hidden");
+hideAll();
+document.getElementById("page3").classList.remove("hidden");
+
+const messages = [
+"Checking compatibility...",
+"Reviewing evidence...",
+"Consulting monkey...",
+"Consulting second monkey...",
+"Second monkey agrees...",
+"Generating final report..."
+];
 
 let progress = 0;
-let bar = document.getElementById("bar");
+let messageIndex = 0;
 
-let interval = setInterval(()=>{
+const bar = document.getElementById("bar");
+
+const interval = setInterval(()=>{
 
 progress += 2;
 
 bar.style.width = progress + "%";
 
+if(progress % 18 === 0 && messageIndex < messages.length){
+document.getElementById("loadingText").innerText =
+messages[messageIndex];
+messageIndex++;
+}
+
 if(progress >= 100){
 
 clearInterval(interval);
 
-document.getElementById("progressText").innerHTML =
-"Research complete.<br><br>Recommendation: Go on a date with Amine.<br><br>Confidence level: suspiciously high.";
-
 setTimeout(()=>{
 
-document.getElementById("page2").classList.add("hidden");
-document.getElementById("page3").classList.remove("hidden");
+hideAll();
+document.getElementById("page4").classList.remove("hidden");
 
-moveButton();
-
-},2000);
+},1000);
 
 }
 
 },140);
+
+}
+
+function showQuestion(){
+
+hideAll();
+document.getElementById("page5").classList.remove("hidden");
+
+moveButton();
 
 }
 
@@ -273,23 +468,20 @@ funnyMessages[attempts];
 
 const yesBtn = document.getElementById("yesBtn");
 
-let scale = 1 + (attempts * 0.08);
-
-yesBtn.style.transform = `scale(${scale})`;
+yesBtn.style.transform =
+`scale(${1 + attempts * 0.08})`;
 
 attempts++;
 
 if(attempts >= 10){
 
-document.getElementById("message").innerHTML =
-"<b>Data collection complete.</b><br>The recommendation remains unchanged.";
+hideAll();
 
-noBtn.style.display = "none";
+setTimeout(()=>{
 
-yesBtn.classList.add("full-screen-yes");
+document.getElementById("page6").classList.remove("hidden");
 
-yesBtn.innerText =
-"ACCEPT SCIENTIFIC RECOMMENDATION ✅";
+},300);
 
 }
 
@@ -298,16 +490,20 @@ yesBtn.innerText =
 noBtn.addEventListener("mouseover", moveButton);
 
 noBtn.addEventListener("touchstart", function(e){
+
 e.preventDefault();
 moveButton();
-});
-
-document.getElementById("yesBtn").addEventListener("click", function(){
-
-document.getElementById("page3").classList.add("hidden");
-document.getElementById("page4").classList.remove("hidden");
 
 });
+
+document.getElementById("yesBtn").addEventListener("click", showCalendar);
+
+function showCalendar(){
+
+hideAll();
+document.getElementById("page7").classList.remove("hidden");
+
+}
 
 function confirmDate(){
 
@@ -321,29 +517,26 @@ return;
 
 }
 
-const formattedDate =
-new Date(date).toLocaleDateString("en-GB", {
-weekday: "long",
-day: "numeric",
-month: "long",
-year: "numeric"
+const formatted =
+new Date(date).toLocaleDateString("en-GB",{
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
 });
 
-document.getElementById("page4").classList.add("hidden");
-document.getElementById("page5").classList.remove("hidden");
+document.getElementById("selectedDate").innerText =
+formatted;
 
-document.getElementById("finalDate").innerText =
-formattedDate +
-" has been officially recorded in the highly scientific dating database.";
+hideAll();
+document.getElementById("page8").classList.remove("hidden");
 
 }
 
-const tomorrow = new Date();
+const datePicker = document.getElementById("datePicker");
 
-tomorrow.setDate(tomorrow.getDate() + 1);
-
-document.getElementById("datePicker").min =
-tomorrow.toISOString().split("T")[0];
+datePicker.min = "2026-11-11";
+datePicker.max = "2026-12-31";
 
 </script>
 
