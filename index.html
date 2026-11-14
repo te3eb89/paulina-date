@@ -37,6 +37,7 @@ button{
     cursor:pointer;
     font-size:20px;
     margin:10px;
+    transition:all .3s ease;
 }
 
 .continueBtn,
@@ -56,10 +57,11 @@ button{
 }
 
 #message{
-    min-height:40px;
+    min-height:50px;
     font-size:20px;
     color:#d63384;
     margin-top:20px;
+    font-weight:bold;
 }
 
 .progress{
@@ -134,7 +136,17 @@ Calculating compatibility...
 
 <h1>The results are in.</h1>
 
-<h2>Will you go on a date with me? You have 10 attempts to say no. (I am never calling it BFF or hang out sue me!!) </h2>
+<h3>
+Peer reviewed by one monkey and absolutely nobody else.
+</h3>
+
+<h2>
+Will you go on a date with me?
+<br><br>
+You have 10 attempts to say no.
+<br>
+(I am never calling it a "BFF" or a "hangout". Sue me.)
+</h2>
 
 <div id="message"></div>
 
@@ -154,9 +166,11 @@ Calculating compatibility...
 
 <h1>Excellent choice.</h1>
 
-<h2>Please select a date Milady.</h2>
+<h2>Please select a date.</h2>
 
-<input type="date" id="datePicker">
+<p>The scientific process is almost complete.</p>
+
+<input type="date" id="datePicker" min="">
 
 <br><br>
 
@@ -187,14 +201,14 @@ The monkey approves 🐒
 <script>
 
 const funnyMessages = [
-"Nice try cutiepie😏",
-"Let's not do anything rash. Relaaaaax",
+"Nice try cutiepie 😏",
+"Let's not do anything rash. Relaaaaax.",
 "Error 404: NO button not found.",
-"The monkey is very disappointed miss Paulina.",
-"come on, really?",
+"The monkey is very disappointed, Miss Paulina.",
+"Come on, really?",
 "That seems statistically unlikely.",
 "My monkey lawyer advised against that choice.",
-"Impressive commitment, sad too..",
+"Impressive commitment. We could have picked a date already.",
 "At this point we should probably just go on the date. Just give up!!",
 "Okay, now I'm rooting for you to catch this button."
 ];
@@ -213,14 +227,14 @@ let interval = setInterval(()=>{
 
 progress += 2;
 
-bar.style.width = progress+"%";
+bar.style.width = progress + "%";
 
 if(progress >= 100){
 
 clearInterval(interval);
 
 document.getElementById("progressText").innerHTML =
-"Research complete.<br><br>Recommendation: Go on a date with Amine.";
+"Research complete.<br><br>Recommendation: Go on a date with Amine.<br><br>Confidence level: suspiciously high.";
 
 setTimeout(()=>{
 
@@ -241,19 +255,27 @@ const noBtn = document.getElementById("noBtn");
 
 function moveButton(){
 
-const maxX = window.innerWidth - 120;
-const maxY = window.innerHeight - 100;
+const maxX = window.innerWidth - 150;
+const maxY = window.innerHeight - 120;
 
-const x = Math.random()*maxX;
-const y = Math.random()*maxY;
+const x = Math.random() * maxX;
+const y = Math.random() * maxY;
 
-noBtn.style.left = x+"px";
-noBtn.style.top = y+"px";
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
 
 if(attempts < funnyMessages.length){
+
 document.getElementById("message").innerText =
 funnyMessages[attempts];
+
 }
+
+const yesBtn = document.getElementById("yesBtn");
+
+let scale = 1 + (attempts * 0.08);
+
+yesBtn.style.transform = `scale(${scale})`;
 
 attempts++;
 
@@ -264,10 +286,10 @@ document.getElementById("message").innerHTML =
 
 noBtn.style.display = "none";
 
-const yesBtn = document.getElementById("yesBtn");
-
 yesBtn.classList.add("full-screen-yes");
-yesBtn.innerText = "ACCEPT RECOMMENDATION ✅";
+
+yesBtn.innerText =
+"ACCEPT SCIENTIFIC RECOMMENDATION ✅";
 
 }
 
@@ -293,17 +315,35 @@ const date =
 document.getElementById("datePicker").value;
 
 if(!date){
+
 alert("Please select a date 🙂");
 return;
+
 }
+
+const formattedDate =
+new Date(date).toLocaleDateString("en-GB", {
+weekday: "long",
+day: "numeric",
+month: "long",
+year: "numeric"
+});
 
 document.getElementById("page4").classList.add("hidden");
 document.getElementById("page5").classList.remove("hidden");
 
 document.getElementById("finalDate").innerText =
-date + " has been officially recorded.";
+formattedDate +
+" has been officially recorded in the highly scientific dating database.";
 
 }
+
+const tomorrow = new Date();
+
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+document.getElementById("datePicker").min =
+tomorrow.toISOString().split("T")[0];
 
 </script>
 
